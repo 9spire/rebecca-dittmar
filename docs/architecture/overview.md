@@ -74,10 +74,11 @@ flowchart TB
 
 Correctness does not depend on visitors knowing the topic.
 
-- **Stage A (always on):** claim ledger → graph fact check → strip/rewrite contradictions and ungrounded hard claims.
-- **Stage B (light touch):** allowlisted web corroboration on high-stakes intents → `web_accuracy_confidence` / blended `accuracy_confidence`. Graph still wins on conflicts. Offline/mock → `null` and skip Stage B.
+- **MVP:** retrieve from graph → generate only from that pack → empty retrieval fallback (no full claim ledger yet).
+- **Enhancement 1 — Stage A:** claim ledger → graph fact check → strip/rewrite contradictions and ungrounded hard claims.
+- **Enhancement 2 — Stage B:** allowlisted web corroboration on high-stakes intents → `web_accuracy_confidence` / blended `accuracy_confidence`. Graph still wins on conflicts. Offline/mock → `null` and skip Stage B.
 
-Details: [safety.md](./safety.md).
+Details: [safety.md](./safety.md). Rollout: [roadmap.md](./roadmap.md).
 
 ```mermaid
 flowchart LR

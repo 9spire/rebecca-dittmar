@@ -1,11 +1,11 @@
 # Portfolio AI — specs
 
-Intent-routed portfolio assistant with a **3D knowledge space** (React Three Fiber) + AI chat. **Specifications only** in this pass.
+Intent-routed portfolio assistant with a **3D knowledge space** (React Three Fiber) + AI chat.
 
-→ **[Architecture overview](docs/architecture/overview.md)**
+**Delivery model:** MVP first, then incremental enhancements → [docs/architecture/roadmap.md](docs/architecture/roadmap.md)
 
-→ **[Interaction / knowledge space](docs/architecture/interaction.md)**
+**Next content step:** fill the graph inventory → [docs/architecture/knowledge.md](docs/architecture/knowledge.md)
 
-→ Full doc index: [docs/README.md](docs/README.md)
+→ [Architecture overview](docs/architecture/overview.md) · [Doc index](docs/README.md)
 
-Implementation starts at roadmap Milestone 1 (scaffold). Until then there is no dev server to run.
+No application runtime until MVP scaffold starts.

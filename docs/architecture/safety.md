@@ -74,7 +74,7 @@ Examples: `(Rebecca, USED_TECH, Terraform, project=X)`, `(Project Y, DEPLOYED_WI
 
 5. **Regression:** golden suites of fixed questions → expected claim sets; CI fails on invent/drop.
 
-### Stage B — Light dual-path web confidence (secondary, selective)
+### Stage B — Light dual-path web confidence (secondary; Enhancement 2)
 
 Not every turn. Eligible intents: `EXPERIENCE_QUERY`, public `PROJECT_LOOKUP`, and other high-stakes factual paths flagged by the orchestrator.
 

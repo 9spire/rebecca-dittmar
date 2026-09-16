@@ -14,11 +14,12 @@ Accept a visitor query; return grounded answer plus validity metadata.
 {
   "message": "What is your experience with CI/CD?",
   "session_id": "optional-client-session-uuid",
-  "conversation_id": "optional-thread-id"
+  "conversation_id": "optional-thread-id",
+  "selected_node_ids": ["tech:cicd", "project:deploy-pipeline"]
 }
 ```
 
-Identity cookies/headers are read by the gateway (see [quotas-identity.md](./quotas-identity.md)). Do not trust client-supplied visitor IDs as the sole key.
+`selected_node_ids` come from the R3F knowledge space selection (see [interaction.md](./interaction.md)). Identity cookies/headers are read by the gateway (see [quotas-identity.md](./quotas-identity.md)). Do not trust client-supplied visitor IDs as the sole key.
 
 ### Response (completion payload)
 
@@ -32,6 +33,15 @@ Identity cookies/headers are read by the gateway (see [quotas-identity.md](./quo
     { "source_type": "graph", "id": "project:deploy-pipeline", "label": "Deploy Pipeline" },
     { "source_type": "vector", "id": "chunk:resume-cicd", "label": "Resume — CI/CD" }
   ],
+  "highlight": {
+    "node_ids": ["project:deploy-pipeline", "tech:github-actions"],
+    "edge_ids": ["e:project-uses-gha"]
+  },
+  "camera": {
+    "mode": "fit_path",
+    "focus_node_ids": ["project:deploy-pipeline", "tech:github-actions"],
+    "region": "projects"
+  },
   "accuracy": {
     "accuracy_confidence": 0.86,
     "web_accuracy_confidence": 0.72,
@@ -60,7 +70,12 @@ Notes:
 - `web_accuracy_confidence` is `null` when Stage B is skipped (ineligible intent, quota, or offline/mock).
 - `accuracy_confidence` is the blended score (graph support rate ± optional web score). When Stage B is null, blend = Stage A only.
 - `fallback: true` when retrieval was empty or all hard claims were stripped — answer should be the configured CTA, not invented prose.
-- Streaming: tokens may arrive on an SSE channel; the `accuracy` object is sent on a final event.
+- `highlight` / `camera` drive the knowledge space after completion (path lighting + fly-to / fit / region). Omit or no-op when the client has WebGL disabled.
+- Streaming: tokens may arrive on an SSE channel; `accuracy`, `highlight`, and `camera` are sent on a final event.
+
+## `GET /api/graph`
+
+Return the client scene payload (nodes/edges with `kind`, `region`, optional totem/emoji markers). May be static seed in early milestones.
 
 ### Errors
 

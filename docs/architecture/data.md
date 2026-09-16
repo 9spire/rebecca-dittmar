@@ -23,6 +23,16 @@ Model professional history, projects, tech stacks, and creative work as connecte
 
 - `BUILT`, `USES_TECH`, `RELATES_TO`, `HAS_ROLE`, `AT`, `PUBLISHED`, `DOCUMENTS`
 
+### Scene metadata (for the R3F knowledge space)
+
+Nodes exposed to the client also carry presentation fields:
+
+- `region` — `experience` | `projects` | `music` | `about`
+- optional `totem` / `emoji` — type marker for the 3D object or billboard
+- stable `id` used in citations, highlights, and `selected_node_ids`
+
+Details: [interaction.md](./interaction.md).
+
 v0 storage: lightweight file or SQLite-backed graph seed. Neo4j (or equivalent) is the later scale path when traversal volume or tooling needs grow.
 
 ## Vector index / RAG

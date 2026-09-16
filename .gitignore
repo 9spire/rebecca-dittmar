@@ -6,6 +6,8 @@ __pycache__/
 .DS_Store
 .env*
 !.env.example
+!.env.local.example
+frontend/.env.local.example
 dist/
 *.egg-info/
 .turbo/

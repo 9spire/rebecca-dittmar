@@ -24,10 +24,12 @@ Note: run uvicorn from `backend/` with `app.main:app`. The seed file is loaded f
 cd frontend
 cp .env.local.example .env.local   # if needed
 npm install
-npm run dev -- --port 43123 -H 127.0.0.1
+npm run dev -- --port 43123 -H 0.0.0.0
 ```
 
-Open [http://127.0.0.1:43123](http://127.0.0.1:43123).
+The Next app proxies `/api/*` to the FastAPI service (`API_ORIGIN`, default `http://127.0.0.1:43124`), so the browser only needs the frontend URL.
+
+Open the **Ports** panel in Cursor and open the forwarded link for port **43123** (or visit [http://127.0.0.1:43123](http://127.0.0.1:43123) if you’re on the same machine).
 
 ## What works in this slice
 

@@ -4,36 +4,51 @@ Intent-routed portfolio assistant with a **3D knowledge space** (React Three Fib
 
 **Status:** MVP scaffold on a **labeled demo seed** (fictional Avery Chen — not a real biography).
 
-## Quick start
+## Run locally
 
-### Backend (port 43124)
+You need **Node.js 20+**, **npm**, and **Python 3.12+**.
+
+### 1. Get the code on your machine
+
+If you haven’t created a GitHub (or other) repo yet, use **Create repo** in the Cursor agent UI, then clone it:
+
+```bash
+git clone <your-repo-url>
+cd <your-repo-folder>
+```
+
+If the repo already exists on your machine, `git pull` on `main` instead.
+
+### 2. Start the API (terminal 1)
 
 ```bash
 cd backend
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --host 127.0.0.1 --port 43124 --app-dir .
+uvicorn app.main:app --host 127.0.0.1 --port 43124
 ```
 
-Note: run uvicorn from `backend/` with `app.main:app`. The seed file is loaded from `../data/demo/graph.json`.
+Leave this running. Health check: [http://127.0.0.1:43124/api/health](http://127.0.0.1:43124/api/health)
 
-### Frontend (port 43123)
+### 3. Start the web app (terminal 2)
 
 ```bash
 cd frontend
-cp .env.local.example .env.local   # if needed
+cp .env.local.example .env.local   # first time only
 npm install
-npm run dev -- --port 43123 -H 0.0.0.0
+npm run dev -- --port 43123 -H 127.0.0.1
 ```
 
-The Next app proxies `/api/*` to the FastAPI service (`API_ORIGIN`, default `http://127.0.0.1:43124`), so the browser only needs the frontend URL.
+### 4. Open the app
 
-Open the **Ports** panel in Cursor and open the forwarded link for port **43123** (or visit [http://127.0.0.1:43123](http://127.0.0.1:43123) if you’re on the same machine).
+[http://127.0.0.1:43123](http://127.0.0.1:43123)
+
+The Next app proxies `/api/*` to FastAPI on port **43124**, so you only open the frontend URL.
 
 ## What works in this slice
 
-- Full-bleed R3D knowledge space with region clusters, totems, orbit/zoom
+- Full-bleed R3F knowledge space with region clusters, totems, orbit/zoom
 - Node selection feeds chat
 - FastAPI `GET /api/graph`, `POST /api/chat`, `GET /api/health`
 - Keyword intent routing + **graph-only** grounded answers (mock, no LLM key)

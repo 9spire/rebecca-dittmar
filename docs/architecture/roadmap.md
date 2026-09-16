@@ -29,7 +29,7 @@ flowchart LR
 | Quotas / identity | [quotas-identity.md](./quotas-identity.md) | Done | Minimal / later |
 | API sketches | [api.md](./api.md) | Done | chat + graph; feedback later |
 
-**Gap closed this pass:** content plan for the graph. **Still needs Rebecca:** real facts in the knowledge checklist (or explicit OK to ship a labeled demo seed).
+**Gap closed:** content plan for the graph. **Demo seed approved for scaffolding** (`data/demo/graph.json`, fictional Avery Chen). Real biography still replaces the demo before a live portfolio launch.
 
 ---
 
@@ -73,11 +73,9 @@ A visitor can open the site, **orbit a real-looking knowledge space**, select no
 
 ### MVP build order (implementation)
 
-1. **M0** — Specs (done enough to build; knowledge checklist fill in parallel).
-2. **M1** — Monorepo/scaffold: Next.js + FastAPI, health, stub chat/graph JSON.
-3. **M2** — R3F scene on seed file (local static OK); selection HUD.
-4. **M3** — Intent classify + graph retrieve + grounded generate + highlight/camera.
-5. **M4** — Wire live `GET /api/graph`; polish empty/loading/error; MVP freeze.
+1. **M0** — Specs (done).
+2. **M1–M3** — **In progress:** Next.js + FastAPI + demo seed + R3F scene + grounded mock chat + highlight/camera.
+3. **M4** — Polish empty/loading/error, reduced-motion, MVP freeze / manual QA.
 
 ---
 

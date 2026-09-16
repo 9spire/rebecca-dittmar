@@ -1,0 +1,221 @@
+{
+  "demo": true,
+  "version": 1,
+  "note": "DEMO SEED — fictional portfolio data for scaffolding. Not a real biography.",
+  "nodes": [
+    {
+      "id": "person:avery",
+      "kind": "Person",
+      "label": "Avery Chen",
+      "region": "experience",
+      "summary": "Demo engineer-producer who ships CI-friendly web systems and late-night electronic mixes.",
+      "emoji": "👤",
+      "totem": "person"
+    },
+    {
+      "id": "org:northwind",
+      "kind": "Organization",
+      "label": "Northwind Labs",
+      "region": "experience",
+      "summary": "Fictional product studio focused on developer tooling.",
+      "emoji": "🏢",
+      "totem": "org"
+    },
+    {
+      "id": "org:harbor",
+      "kind": "Organization",
+      "label": "Harbor Audio",
+      "region": "experience",
+      "summary": "Fictional creative-tech collective bridging music and software.",
+      "emoji": "🏢",
+      "totem": "org"
+    },
+    {
+      "id": "role:platform-eng",
+      "kind": "Role",
+      "label": "Platform Engineer",
+      "region": "experience",
+      "summary": "2022–present · Owns CI/CD templates, deploy previews, and release automation at Northwind Labs.",
+      "emoji": "💼",
+      "totem": "role"
+    },
+    {
+      "id": "role:fullstack",
+      "kind": "Role",
+      "label": "Full-Stack Engineer",
+      "region": "experience",
+      "summary": "2019–2022 · Built interactive web experiences for Harbor Audio artists.",
+      "emoji": "💼",
+      "totem": "role"
+    },
+    {
+      "id": "project:pipeline-garden",
+      "kind": "Project",
+      "label": "Pipeline Garden",
+      "region": "projects",
+      "summary": "Self-serve GitHub Actions starter that turns monorepos into preview environments in one PR.",
+      "emoji": "🌿",
+      "totem": "project",
+      "public": true
+    },
+    {
+      "id": "project:signal-board",
+      "kind": "Project",
+      "label": "Signal Board",
+      "region": "projects",
+      "summary": "Realtime ops dashboard for release health, flaky tests, and deploy rollback cues.",
+      "emoji": "📡",
+      "totem": "project",
+      "public": true
+    },
+    {
+      "id": "project:mix-atlas",
+      "kind": "Project",
+      "label": "Mix Atlas",
+      "region": "projects",
+      "summary": "Catalog UI that maps mixes to stems, venues, and collaborators.",
+      "emoji": "🗺️",
+      "totem": "project",
+      "public": true
+    },
+    {
+      "id": "tech:typescript",
+      "kind": "Tech",
+      "label": "TypeScript",
+      "region": "projects",
+      "summary": "Primary language for web UIs and shared packages.",
+      "emoji": "🟦",
+      "totem": "tech"
+    },
+    {
+      "id": "tech:nextjs",
+      "kind": "Tech",
+      "label": "Next.js",
+      "region": "projects",
+      "summary": "App Router frontends for Signal Board and Mix Atlas.",
+      "emoji": "⬛",
+      "totem": "tech"
+    },
+    {
+      "id": "tech:python",
+      "kind": "Tech",
+      "label": "Python",
+      "region": "projects",
+      "summary": "Automation scripts and FastAPI services around Pipeline Garden.",
+      "emoji": "🐍",
+      "totem": "tech"
+    },
+    {
+      "id": "tech:github-actions",
+      "kind": "Tech",
+      "label": "GitHub Actions",
+      "region": "projects",
+      "summary": "CI/CD backbone for preview deploys and release gates.",
+      "emoji": "⚙️",
+      "totem": "tech"
+    },
+    {
+      "id": "tech:terraform",
+      "kind": "Tech",
+      "label": "Terraform",
+      "region": "projects",
+      "summary": "Infrastructure-as-code for ephemeral preview stacks.",
+      "emoji": "🏗️",
+      "totem": "tech"
+    },
+    {
+      "id": "tech:threejs",
+      "kind": "Tech",
+      "label": "Three.js",
+      "region": "projects",
+      "summary": "WebGL scenes inside Mix Atlas visualizations.",
+      "emoji": "🌀",
+      "totem": "tech"
+    },
+    {
+      "id": "domain:devops",
+      "kind": "Domain",
+      "label": "DevOps",
+      "region": "projects",
+      "summary": "Delivery systems, observability, and release craft.",
+      "emoji": "🔧",
+      "totem": "domain"
+    },
+    {
+      "id": "domain:music",
+      "kind": "Domain",
+      "label": "Music Production",
+      "region": "music",
+      "summary": "Electronic production, live mixing, and sound design.",
+      "emoji": "🎹",
+      "totem": "domain"
+    },
+    {
+      "id": "media:neon-freight",
+      "kind": "Media",
+      "label": "Neon Freight (mix)",
+      "region": "music",
+      "summary": "2025 · 62-minute warehouse techno mix; demo catalog entry only.",
+      "emoji": "🎧",
+      "totem": "media",
+      "public": true
+    },
+    {
+      "id": "media:glass-harbor",
+      "kind": "Media",
+      "label": "Glass Harbor (mix)",
+      "region": "music",
+      "summary": "2024 · Ambient-electro live set recorded for a fictional riverside night.",
+      "emoji": "🎧",
+      "totem": "media",
+      "public": true
+    },
+    {
+      "id": "media:circuit-dusk",
+      "kind": "Media",
+      "label": "Circuit Dusk (track)",
+      "region": "music",
+      "summary": "2024 · Short IDM sketch used as Mix Atlas sample audio.",
+      "emoji": "🎵",
+      "totem": "media",
+      "public": true
+    },
+    {
+      "id": "meta:contact",
+      "kind": "Document",
+      "label": "Contact",
+      "region": "about",
+      "summary": "Demo CTA: reach Avery at hello@example.invalid (fictional).",
+      "emoji": "✉️",
+      "totem": "meta"
+    }
+  ],
+  "edges": [
+    { "id": "e:avery-role-platform", "source": "person:avery", "target": "role:platform-eng", "rel": "HAS_ROLE" },
+    { "id": "e:avery-role-fullstack", "source": "person:avery", "target": "role:fullstack", "rel": "HAS_ROLE" },
+    { "id": "e:role-platform-at", "source": "role:platform-eng", "target": "org:northwind", "rel": "AT" },
+    { "id": "e:role-fullstack-at", "source": "role:fullstack", "target": "org:harbor", "rel": "AT" },
+    { "id": "e:avery-built-pipeline", "source": "person:avery", "target": "project:pipeline-garden", "rel": "BUILT" },
+    { "id": "e:avery-built-signal", "source": "person:avery", "target": "project:signal-board", "rel": "BUILT" },
+    { "id": "e:avery-built-atlas", "source": "person:avery", "target": "project:mix-atlas", "rel": "BUILT" },
+    { "id": "e:pipeline-gha", "source": "project:pipeline-garden", "target": "tech:github-actions", "rel": "USES_TECH" },
+    { "id": "e:pipeline-python", "source": "project:pipeline-garden", "target": "tech:python", "rel": "USES_TECH" },
+    { "id": "e:pipeline-tf", "source": "project:pipeline-garden", "target": "tech:terraform", "rel": "USES_TECH" },
+    { "id": "e:pipeline-devops", "source": "project:pipeline-garden", "target": "domain:devops", "rel": "RELATES_TO" },
+    { "id": "e:signal-ts", "source": "project:signal-board", "target": "tech:typescript", "rel": "USES_TECH" },
+    { "id": "e:signal-next", "source": "project:signal-board", "target": "tech:nextjs", "rel": "USES_TECH" },
+    { "id": "e:signal-gha", "source": "project:signal-board", "target": "tech:github-actions", "rel": "USES_TECH" },
+    { "id": "e:signal-devops", "source": "project:signal-board", "target": "domain:devops", "rel": "RELATES_TO" },
+    { "id": "e:atlas-ts", "source": "project:mix-atlas", "target": "tech:typescript", "rel": "USES_TECH" },
+    { "id": "e:atlas-next", "source": "project:mix-atlas", "target": "tech:nextjs", "rel": "USES_TECH" },
+    { "id": "e:atlas-three", "source": "project:mix-atlas", "target": "tech:threejs", "rel": "USES_TECH" },
+    { "id": "e:atlas-music", "source": "project:mix-atlas", "target": "domain:music", "rel": "RELATES_TO" },
+    { "id": "e:avery-neon", "source": "person:avery", "target": "media:neon-freight", "rel": "PUBLISHED" },
+    { "id": "e:avery-glass", "source": "person:avery", "target": "media:glass-harbor", "rel": "PUBLISHED" },
+    { "id": "e:avery-circuit", "source": "person:avery", "target": "media:circuit-dusk", "rel": "PUBLISHED" },
+    { "id": "e:neon-music", "source": "media:neon-freight", "target": "domain:music", "rel": "RELATES_TO" },
+    { "id": "e:glass-music", "source": "media:glass-harbor", "target": "domain:music", "rel": "RELATES_TO" },
+    { "id": "e:circuit-music", "source": "media:circuit-dusk", "target": "domain:music", "rel": "RELATES_TO" },
+    { "id": "e:avery-contact", "source": "person:avery", "target": "meta:contact", "rel": "DOCUMENTS" }
+  ]
+}

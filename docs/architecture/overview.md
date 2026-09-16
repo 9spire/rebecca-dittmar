@@ -94,9 +94,10 @@ flowchart LR
 | Doc | Topic |
 | --- | --- |
 | [interaction.md](./interaction.md) | R3F knowledge space, chat↔graph loop |
+| [knowledge.md](./knowledge.md) | What content enters the graph (MVP inventory) |
 | [intents.md](./intents.md) | Intent catalog, BAML shape, handlers |
 | [data.md](./data.md) | Graph, vectors, hybrid retrieval, telemetry |
 | [safety.md](./safety.md) | Prompt defenses, Stages A/B, feedback role |
 | [quotas-identity.md](./quotas-identity.md) | Visitor keys, RPM/TPM, Stage B budget |
 | [api.md](./api.md) | Endpoint sketches |
-| [roadmap.md](./roadmap.md) | Implementation milestones |
+| [roadmap.md](./roadmap.md) | **MVP first**, then enhancements |

@@ -1,76 +1,113 @@
-# Roadmap
+# Roadmap — MVP then enhance
 
-Technical milestones only — no calendar estimates. Specs come first; each later phase can revise these docs.
+Technical milestones only — no calendar estimates. Architecture vision stays large; **delivery is sliced**. Anything not in MVP is an explicit enhancement.
 
-## Milestone 0 — Specs (current)
+Related: [knowledge.md](./knowledge.md) (what content ships when), [interaction.md](./interaction.md) (R3F space).
 
-- Living architecture docs under `docs/architecture/`
-- Validity stack (Stage A claim ledger + Stage B light web confidence) documented
-- Intent catalog, API sketches, quotas/identity, data model sketched
-- **R3F knowledge space** chosen as primary interaction surface ([interaction.md](./interaction.md))
+```mermaid
+flowchart LR
+  M0[M0_Specs]
+  MVP[MVP_Slice]
+  E1[E1_RAG_and_StageA]
+  E2[E2_WebConfidence]
+  E3[E3_Hardening_Polish]
+  M0 --> MVP --> E1 --> E2 --> E3
+```
 
-## Milestone 1 — Scaffold
+---
 
-- Next.js frontend shell: chat dock + placeholder full-bleed canvas host
-- FastAPI service with health + stub `POST /api/chat` (+ stub `GET /api/graph`)
-- Shared types / OpenAPI alignment for chat, feedback, graph scene, camera/highlight cues
-- Mock LLM path so local demos run without credentials
+## Spec audit (living)
 
-## Milestone 2 — Knowledge space v0 (visual)
+| Area | Doc | Spec status | MVP? |
+| --- | --- | --- | --- |
+| Layers / flow | [overview.md](./overview.md) | Done | Core |
+| R3F knowledge space | [interaction.md](./interaction.md) | Done | Core (simplified art) |
+| Intents / BAML | [intents.md](./intents.md) | Done | Subset of intents |
+| Data model | [data.md](./data.md) | Done | Graph seed only |
+| **Knowledge inventory** | [knowledge.md](./knowledge.md) | **In progress** | Fill checklist |
+| Validity A+B | [safety.md](./safety.md) | Done | **Grounding only** in MVP; A/B later |
+| Quotas / identity | [quotas-identity.md](./quotas-identity.md) | Done | Minimal / later |
+| API sketches | [api.md](./api.md) | Done | chat + graph; feedback later |
 
-- Client-only R3F Canvas with orbit/zoom, region layout, sample nodes/edges
-- Custom totems / type markers; idle drift + focus fly-to
-- Selection HUD wired to local state (not yet live AI)
-- Reduced-motion + WebGL fallback list
+**Gap closed this pass:** content plan for the graph. **Still needs Rebecca:** real facts in the knowledge checklist (or explicit OK to ship a labeled demo seed).
 
-## Milestone 3 — Intent stub
+---
 
-- BAML intent classification wired end-to-end
-- Handler dispatch table for all v0 intents
-- Off-topic / unsafe paths returning correct refusals/redirects
-- Chat accepts `selected_node_ids`; stub retrieval
+## MVP definition (ship this first)
 
-## Milestone 4 — Graph + RAG seed
+A visitor can open the site, **orbit a real-looking knowledge space**, select nodes, ask the assistant about those topics, and get **grounded answers** that light the cited path. No hallucinated employers/stacks when the graph has no data.
 
-- SQLite/file graph seed with sample Person/Project/Tech/Media + `region` metadata
-- Vector index over seeded docs
-- Hybrid retrieval into a bounded context pack
-- Deterministic grounding + empty-retrieval fallback CTA
-- Live `GET /api/graph` feeds the scene
+### In scope
 
-## Milestone 5 — Chat ↔ scene coupling
+| Slice | Deliverable |
+| --- | --- |
+| App shell | Next.js + chat dock + full-bleed R3F canvas |
+| Scene | Regions, ~25–40 seed nodes, orbit/zoom, select, idle drift, focus fly-to |
+| API | FastAPI `GET /api/graph`, `POST /api/chat`, `GET /api/health` |
+| Intents | BAML (or strict schema): `EXPERIENCE_QUERY`, `PROJECT_LOOKUP`, `MEDIA_SEARCH`, `CONTACT_OR_META`, `OFF_TOPIC`, `UNSAFE` |
+| Retrieval | **Graph-only** neighborhood retrieve from seed + optional node `summary` |
+| Generation | LLM (mock fallback) answers **only** from retrieved pack; empty → CTA |
+| Coupling | `selected_node_ids` in; `citations` + `highlight` + `camera` out |
+| Safety (lite) | System prompt bookends, delimiters, off-topic/unsafe intents |
+| Knowledge | Curated MVP inventory per [knowledge.md](./knowledge.md) |
 
-- Completion `highlight` + `camera` cues drive path lighting and fly-to / region moves
-- Intent-aware region bias (e.g. `MEDIA_SEARCH` → music region)
-- Citation click-back from chat to node focus
+### Explicitly out of MVP
 
-## Milestone 6 — Stage A validity
+- Vector DB / hybrid RAG
+- Stage A claim ledger + verifier loop
+- Stage B web corroboration / `web_accuracy_confidence`
+- Thumbs feedback + feedback log
+- Full multi-signal quotas (beyond a simple global/IP rate limit if needed)
+- Neo4j, Redis, Pinecone, admin ingest
+- Heavy postprocessing / max art direction (clean readable totems are enough)
+- Auth
 
-- BAML claim extractor
-- Graph fact checker (`SUPPORTED` / `CONTRADICTED` / `NOT_IN_GRAPH`)
-- Strip/rewrite policy for hard claims
-- Validity telemetry store
-- First golden question → expected claims suite in CI
+### MVP exit criteria
 
-## Milestone 7 — Stage B light web confidence
+1. Dev server runs; graph loads from seed.
+2. Select project → ask stack → answer cites graph nodes → path highlights + camera move.
+3. Ask something **not** in graph → fallback CTA, no invented facts.
+4. Off-topic / unsafe → refuse or redirect.
+5. Mock mode works without API keys.
+6. Knowledge file is either real approved content or clearly marked `demo: true`.
 
-- Allowlist config + fetch/search adapter
-- Structured corroboration judge → `web_accuracy_confidence` + per-claim tags
-- Blend into `accuracy_confidence` on API responses
-- Stage B quota budget; offline `null` behavior
-- High-stakes intent gating only
+### MVP build order (implementation)
 
-## Milestone 8 — Quotas, identity, feedback UX
+1. **M0** — Specs (done enough to build; knowledge checklist fill in parallel).
+2. **M1** — Monorepo/scaffold: Next.js + FastAPI, health, stub chat/graph JSON.
+3. **M2** — R3F scene on seed file (local static OK); selection HUD.
+4. **M3** — Intent classify + graph retrieve + grounded generate + highlight/camera.
+5. **M4** — Wire live `GET /api/graph`; polish empty/loading/error; MVP freeze.
 
-- Composite visitor key (IP heuristics + cookie + session)
-- RPM + TPM sliding window / token bucket
-- Thumbs usefulness widget + feedback log (not correctness)
-- Optional confidence affordance in UI
+---
 
-## Milestone 9 — Polish
+## Enhancement 1 — Smarter grounding
 
-- Prompt bookends / delimiter hardening pass
+- Vector index (resume, project docs); hybrid retrieval
+- Stage A: claim extract → graph fact check → strip/rewrite
+- Validity telemetry + first golden-question CI suite
+- Richer node summaries / Document nodes
+
+## Enhancement 2 — Web confidence + trust UX
+
+- Stage B allowlisted corroboration → `web_accuracy_confidence`
+- Blended `accuracy_confidence` in API/UI
+- Stage B budget; offline null behavior
+- Optional subtle confidence affordance in chat
+
+## Enhancement 3 — Hardening and polish
+
+- Composite visitor identity + RPM/TPM sliding windows
+- Feedback thumbs (usefulness only) + log
 - Input moderation + output leak checks
-- Scene art pass (totems, lighting, postprocessing discipline)
-- Neo4j / pgvector / Redis upgrades when single-node limits hurt
-- Knowledge ingest tooling for ongoing graph/vector updates
+- Scene art pass (totems, lighting, motion discipline)
+- Neo4j / pgvector / Redis when limits hurt
+- Knowledge ingest tooling; content waves from [knowledge.md](./knowledge.md)
+
+---
+
+## What “now” means
+
+1. **Finish MVP knowledge checklist** (Rebecca) — or approve a temporary demo seed.
+2. **Start MVP M1 scaffold** when knowledge direction is clear (demo seed is enough to code against).
+3. Do **not** build Stage B, full quotas, or RAG until MVP exit criteria pass.

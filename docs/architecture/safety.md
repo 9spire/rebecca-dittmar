@@ -35,7 +35,9 @@ The assistant only answers within portfolio scope (experience, projects, creativ
 
 Visitors may not know enough to verify technical claims. Correctness is enforced in Verifier / Guardrails.
 
-### Stage A — Claim ledger + deterministic fact check (primary, always on)
+**Rollout:** MVP ships **grounded generation only** (answer solely from retrieved graph context; empty → CTA). Stage A and Stage B land in enhancements — see [roadmap.md](./roadmap.md). The full design below is the target architecture.
+
+### Stage A — Claim ledger + deterministic fact check (primary; Enhancement 1)
 
 1. **Generator** drafts a reply from retrieved graph/vector context only.
 2. **Claim extractor** (BAML) splits the reply into atomic claims:

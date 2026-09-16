@@ -183,6 +183,15 @@ def retrieve(
         seed_ids = ["meta:contact", "person:avery"]
     if intent == "EXPERIENCE_QUERY" and not seed_ids:
         seed_ids = ["person:avery", "role:platform-eng", "tech:github-actions"]
+    if intent == "EXPERIENCE_QUERY":
+        for forced in ("role:platform-eng", "tech:github-actions", "project:pipeline-garden"):
+            if forced in nodes and forced not in seed_ids and (
+                "ci" in message.lower()
+                or "cd" in message.lower()
+                or "cicd" in message.lower()
+                or "github" in message.lower()
+            ):
+                seed_ids.insert(0, forced)
 
     if not seed_ids:
         return [], [], []

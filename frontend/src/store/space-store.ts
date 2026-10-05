@@ -23,6 +23,7 @@ type SpaceState = {
   messages: ChatMessage[];
   chatLoading: boolean;
   chatError: string | null;
+  viewResetId: number;
   setGraph: (graph: GraphPayload) => void;
   setGraphError: (error: string | null) => void;
   toggleSelect: (id: string) => void;
@@ -30,6 +31,7 @@ type SpaceState = {
   applyChatResult: (userText: string, result: ChatResponse) => void;
   setChatLoading: (loading: boolean) => void;
   setChatError: (error: string | null) => void;
+  requestViewReset: () => void;
 };
 
 export const useSpaceStore = create<SpaceState>((set, get) => ({
@@ -44,6 +46,7 @@ export const useSpaceStore = create<SpaceState>((set, get) => ({
   messages: [],
   chatLoading: false,
   chatError: null,
+  viewResetId: 0,
   setGraph: (graph) => set({ graph, graphError: null }),
   setGraphError: (graphError) => set({ graphError }),
   toggleSelect: (id) => {
@@ -78,4 +81,5 @@ export const useSpaceStore = create<SpaceState>((set, get) => ({
     })),
   setChatLoading: (chatLoading) => set({ chatLoading }),
   setChatError: (chatError) => set({ chatError, chatLoading: false }),
+  requestViewReset: () => set((state) => ({ viewResetId: state.viewResetId + 1 })),
 }));
